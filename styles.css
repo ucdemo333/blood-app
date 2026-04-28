@@ -4,11 +4,39 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-primary: white;
+    --text-primary: #333;
+    --text-secondary: #555;
+    --text-tertiary: #666;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --card-bg: #f8f9fa;
+    --focus-border: #667eea;
+    --focus-shadow: rgba(102, 126, 234, 0.2);
+}
+
+body.dark-mode {
+    --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    --bg-primary: #2d2d44;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-tertiary: #999;
+    --border-color: #444;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --card-bg: #1e1e2e;
+    --focus-border: #667eea;
+    --focus-shadow: rgba(102, 126, 234, 0.3);
+}
+
 body {
     font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--bg-gradient);
     min-height: 100vh;
     padding: 20px;
+    color: var(--text-primary);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -21,10 +49,43 @@ header {
     margin-bottom: 20px;
 }
 
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
 header h1 {
     color: white;
     font-size: 1.8rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
 }
 
 main {
@@ -34,14 +95,15 @@ main {
 }
 
 .input-section, .records-section {
-    background: white;
+    background: var(--bg-primary);
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .input-section h2, .records-section h2 {
-    color: #333;
+    color: var(--text-primary);
     font-size: 1.3rem;
     margin-bottom: 15px;
     padding-bottom: 10px;
@@ -54,7 +116,7 @@ main {
 
 .form-group label {
     display: block;
-    color: #555;
+    color: var(--text-secondary);
     font-weight: 600;
     margin-bottom: 5px;
     font-size: 0.95rem;
@@ -65,18 +127,20 @@ main {
 .form-group textarea {
     width: 100%;
     padding: 12px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    border-color: var(--focus-border);
+    box-shadow: 0 0 0 3px var(--focus-shadow);
 }
 
 .form-group textarea {
@@ -146,22 +210,22 @@ main {
 
 .no-records {
     text-align: center;
-    color: #999;
+    color: var(--text-tertiary);
     padding: 30px;
     font-size: 1rem;
 }
 
 .record-card {
-    background: #f8f9fa;
+    background: var(--card-bg);
     border-radius: 10px;
     padding: 15px;
     border-left: 4px solid #667eea;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
 }
 
 .record-card:hover {
     transform: translateX(5px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px var(--shadow-color);
 }
 
 .record-header {
@@ -172,7 +236,7 @@ main {
 }
 
 .record-date {
-    color: #666;
+    color: var(--text-tertiary);
     font-size: 0.9rem;
 }
 
@@ -204,7 +268,7 @@ main {
 .data-label {
     display: block;
     font-size: 0.8rem;
-    color: #888;
+    color: var(--text-tertiary);
     margin-bottom: 3px;
 }
 
@@ -231,7 +295,7 @@ main {
     justify-content: space-between;
     align-items: center;
     padding-top: 10px;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--border-color);
 }
 
 .record-medication {
@@ -258,7 +322,7 @@ main {
 }
 
 .record-notes {
-    color: #666;
+    color: var(--text-tertiary);
     font-size: 0.9rem;
     font-style: italic;
 }

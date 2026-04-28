@@ -1,5 +1,36 @@
 // 血壓管理App - JavaScript
 
+// 主題管理
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateThemeToggleIcon('☀️');
+    } else {
+        document.body.classList.remove('dark-mode');
+        updateThemeToggleIcon('🌙');
+    }
+}
+
+function toggleTheme() {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    const theme = isDarkMode ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+    updateThemeToggleIcon(isDarkMode ? '☀️' : '🌙');
+}
+
+function updateThemeToggleIcon(icon) {
+    const toggleBtn = document.getElementById('themeToggle');
+    if (toggleBtn) {
+        const iconSpan = toggleBtn.querySelector('.toggle-icon');
+        if (iconSpan) {
+            iconSpan.textContent = icon;
+        }
+    }
+}
+
 // 從 localStorage 載入記錄
 function loadRecords() {
     const records = localStorage.getItem('bpRecords');
@@ -139,4 +170,13 @@ document.getElementById('bpForm').addEventListener('submit', function(e) {
 document.getElementById('clearAll').addEventListener('click', clearAllRecords);
 
 // 頁面載入時渲染記錄
-document.addEventListener('DOMContentLoaded', renderRecords);
+document.addEventListener('DOMContentLoaded', function() {
+    initTheme();
+    renderRecords();
+    
+    // 設定主題切換按鈕事件
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+});
