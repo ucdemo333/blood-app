@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>血壓管理App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🩺 血壓管理</h1>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <h2>新增記錄</h2>
+                <form id="bpForm">
+                    <div class="form-group">
+                        <label for="systolic">收縮壓 (mmHg)</label>
+                        <input type="number" id="systolic" required min="60" max="250" placeholder="例如: 120">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="diastolic">舒張壓 (mmHg)</label>
+                        <input type="number" id="diastolic" required min="40" max="150" placeholder="例如: 80">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pulse">脈搏 (bpm)</label>
+                        <input type="number" id="pulse" required min="40" max="200" placeholder="例如: 72">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="medication">是否使用藥物治療</label>
+                        <select id="medication" required>
+                            <option value="">請選擇</option>
+                            <option value="無">無</option>
+                            <option value="已服藥">已服藥</option>
+                            <option value="未服藥">未服藥</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">備註</label>
+                        <textarea id="notes" rows="3" placeholder="可選填備註資訊"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">儲存記錄</button>
+                </form>
+            </section>
+
+            <section class="records-section">
+                <div class="records-header">
+                    <h2>血壓記錄</h2>
+                    <button id="clearAll" class="btn-clear">清除全部</button>
+                </div>
+                <div id="recordsList" class="records-list">
+                    <p class="no-records">尚無記錄，請輸入血壓資料</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
